@@ -3,6 +3,9 @@ import Navbar from "./Components/Navbar";
 import Hero from "./Components/Hero";
 import Technologies from "./Components/Technologies";
 import type { Technology } from "./Types/technology";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function App() {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
@@ -37,31 +40,53 @@ function App() {
 
   // Add technology
   const handleAdd = (technology: Technology) => {
-    const alreadySelected = selectedTechnologies.some(
-      (item) => item.id === technology.id
+  const alreadySelected = selectedTechnologies.some(
+    (item) => item.id === technology.id
+  );
+
+  if (alreadySelected) {
+    toast.warning(
+      `${technology.name} is already in your stack`
     );
 
-    if (alreadySelected) {
-      return;
-    }
+    return;
+  }
 
-    setSelectedTechnologies((previous) => [
-      ...previous,
-      technology,
-    ]);
-  };
+  setSelectedTechnologies((previous) => [
+    ...previous,
+    technology,
+  ]);
+
+  toast.success(
+    `${technology.name} added to stack`
+  );
+};
 
   // Remove technology
   const handleRemove = (id: string) => {
-    setSelectedTechnologies((previous) =>
-      previous.filter((technology) => technology.id !== id)
+  const removedTechnology = selectedTechnologies.find(
+    (item) => item.id === id
+  );
+
+  setSelectedTechnologies((previous) =>
+    previous.filter(
+      (technology) => technology.id !== id
+    )
+  );
+
+  if (removedTechnology) {
+    toast.info(
+      `${removedTechnology.name} removed`
     );
-  };
+  }
+};
 
   // Remove all
-  const handleRemoveAll = () => {
-    setSelectedTechnologies([]);
-  };
+ const handleRemoveAll = () => {
+  setSelectedTechnologies([]);
+
+  toast.error("All technologies removed");
+};
 
   return (
     <>
@@ -89,6 +114,7 @@ function App() {
           onRemoveAll={handleRemoveAll}
         />
       )}
+      <ToastContainer position="top-right" />
     </>
   );
 }

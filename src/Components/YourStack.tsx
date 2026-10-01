@@ -84,12 +84,11 @@ const YourStack = ({
 
               {/* Remove */}
               <button
-                onClick={() => onRemove(technology.id)}
-                className="rounded-lg px-2 py-1 text-sm font-medium text-red-500 transition hover:bg-red-50"
-                aria-label={`Remove ${technology.name}`}
-              >
-                ×
-              </button>
+  onClick={() => onRemove(technology.id)}
+  className="rounded-lg px-2 py-1 text-sm font-medium text-red-500 transition hover:bg-red-50"
+>
+  ×
+</button>
             </div>
           ))}
         </div>

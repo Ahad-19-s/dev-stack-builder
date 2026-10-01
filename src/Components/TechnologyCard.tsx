@@ -63,16 +63,18 @@ const TechnologyCard = ({
 
       {/* Add Button */}
       <button
-        onClick={() => onAdd(technology)}
-        disabled={isSelected}
-        className={`mt-5 w-full rounded-xl px-4 py-3 font-semibold text-white transition ${
-          isSelected
-            ? "cursor-not-allowed bg-gray-400"
-            : "bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600 hover:opacity-90"
-        }`}
-      >
-        {isSelected ? "✓ Added to Stack" : "Add to Stack"}
-      </button>
+  onClick={() => onAdd(technology)}
+  disabled={isSelected}
+  className={`mt-5 w-full rounded-xl px-4 py-3 font-semibold text-white transition ${
+    isSelected
+      ? "cursor-not-allowed bg-gray-400"
+      : "bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600 hover:opacity-90"
+  }`}
+>
+  {isSelected
+    ? "✓ Added to Stack"
+    : "Add to Stack"}
+</button>
     </div>
   );
 };
