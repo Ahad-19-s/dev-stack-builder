@@ -1,12 +1,15 @@
+import React from 'react';
+import Navbar from './Components/Navbar';
+import Hero from './Components/Hero';
 
-function App() {
-
+const App = () => {
   return (
-    <>
-     <h1>Dev Stack</h1>
-    </>
-   
-  )
-}
+    <div>
+       <Navbar />
+        <Hero />
+      
+    </div>
+  );
+};
 
-export default App
+export default App;
