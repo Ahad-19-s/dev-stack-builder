@@ -6,6 +6,10 @@ import type { Technology } from "./Types/technology";
 
 function App() {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
+  const [selectedTechnologies, setSelectedTechnologies] = useState<
+    Technology[]
+  >([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -31,6 +35,34 @@ function App() {
     loadTechnologies();
   }, []);
 
+  // Add technology
+  const handleAdd = (technology: Technology) => {
+    const alreadySelected = selectedTechnologies.some(
+      (item) => item.id === technology.id
+    );
+
+    if (alreadySelected) {
+      return;
+    }
+
+    setSelectedTechnologies((previous) => [
+      ...previous,
+      technology,
+    ]);
+  };
+
+  // Remove technology
+  const handleRemove = (id: string) => {
+    setSelectedTechnologies((previous) =>
+      previous.filter((technology) => technology.id !== id)
+    );
+  };
+
+  // Remove all
+  const handleRemoveAll = () => {
+    setSelectedTechnologies([]);
+  };
+
   return (
     <>
       <Navbar />
@@ -49,7 +81,13 @@ function App() {
       )}
 
       {!loading && !error && (
-        <Technologies technologies={technologies} />
+        <Technologies
+          technologies={technologies}
+          selectedTechnologies={selectedTechnologies}
+          onAdd={handleAdd}
+          onRemove={handleRemove}
+          onRemoveAll={handleRemoveAll}
+        />
       )}
     </>
   );

@@ -1,17 +1,28 @@
 import type { Technology } from "../Types/technology";
 import TechnologyCard from "./TechnologyCard";
+import YourStack from "./YourStack";
 
 type TechnologiesProps = {
   technologies: Technology[];
+  selectedTechnologies: Technology[];
+  onAdd: (technology: Technology) => void;
+  onRemove: (id: string) => void;
+  onRemoveAll: () => void;
 };
 
-const Technologies = ({ technologies }: TechnologiesProps) => {
+const Technologies = ({
+  technologies,
+  selectedTechnologies,
+  onAdd,
+  onRemove,
+  onRemoveAll,
+}: TechnologiesProps) => {
   return (
     <section className="bg-gray-50 py-16">
       <div className="mx-auto max-w-7xl px-4">
-        
+
         {/* Section Heading */}
-        <div className="mb-10 text-center">
+        <div className="mb-10">
           <p className="font-semibold text-pink-500">
             TECHNOLOGY STACK
           </p>
@@ -23,21 +34,37 @@ const Technologies = ({ technologies }: TechnologiesProps) => {
             </span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
-            Discover modern technologies and choose the tools you want to
-            add to your developer stack.
+          <p className="mt-4 max-w-2xl text-gray-600">
+            Discover modern technologies and choose the tools you want
+            to add to your developer stack.
           </p>
         </div>
 
-        {/* Technology Cards */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {technologies.map((technology) => (
-            <TechnologyCard
-              key={technology.id}
-              technology={technology}
-            />
-          ))}
-        </div>
+        {/* Grid + Sidebar */}
+        {/* Grid + Sidebar */}
+<div className="grid gap-6 lg:grid-cols-[1fr_300px]">
+
+  {/* Technology Cards */}
+  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+    {technologies.map((technology) => (
+      <TechnologyCard
+        key={technology.id}
+        technology={technology}
+        onAdd={onAdd}
+        isSelected={selectedTechnologies.some(
+          (item) => item.id === technology.id
+        )}
+      />
+    ))}
+  </div>
+
+  {/* Your Stack */}
+  <YourStack
+    selectedTechnologies={selectedTechnologies}
+    onRemove={onRemove}
+    onRemoveAll={onRemoveAll}
+  />
+</div>
       </div>
     </section>
   );
