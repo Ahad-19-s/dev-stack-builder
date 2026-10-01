@@ -6,6 +6,7 @@ import type { Technology } from "./Types/technology";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import Footer from "./Components/Footer";
 
 function App() {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
@@ -92,12 +93,17 @@ function App() {
     <>
       <Navbar />
       <Hero />
+       
 
       {loading && (
-        <p className="py-16 text-center text-gray-600">
-          Loading technologies...
-        </p>
-      )}
+  <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
+    <span className="loading loading-spinner loading-lg text-pink-500"></span>
+
+    <p className="text-lg font-medium text-gray-600">
+      Loading technologies...
+    </p>
+  </div>
+)}
 
       {error && (
         <p className="py-16 text-center text-red-500">
@@ -105,16 +111,21 @@ function App() {
         </p>
       )}
 
-      {!loading && !error && (
-        <Technologies
-          technologies={technologies}
-          selectedTechnologies={selectedTechnologies}
-          onAdd={handleAdd}
-          onRemove={handleRemove}
-          onRemoveAll={handleRemoveAll}
-        />
-      )}
-      <ToastContainer position="top-right" />
+    {!loading && !error && (
+  <>
+    <Technologies
+      technologies={technologies}
+      selectedTechnologies={selectedTechnologies}
+      onAdd={handleAdd}
+      onRemove={handleRemove}
+      onRemoveAll={handleRemoveAll}
+    />
+
+    <Footer />
+  </>
+)}
+      <ToastContainer position="bottom-right" />
+      
     </>
   );
 }
