@@ -6,11 +6,11 @@ Dev Stack Builder is a responsive web application that helps developers explore 
 
 ## Live Link
 
-Add your live site link here.
+dev-stack-project-app.netlify.app
 
 ## GitHub Repository
 
-Add your GitHub repository link here.
+(https://github.com/Ahad-19-s/dev-stack-builder.git)
 
 ## Technologies Used
 
