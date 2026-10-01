@@ -1,4 +1,4 @@
-export interface Technology {
+export type Technology = {
   id: string;
   name: string;
   category: string;
@@ -7,4 +7,4 @@ export interface Technology {
   rating: number;
   difficulty: string;
   badge: string;
-}
+};
